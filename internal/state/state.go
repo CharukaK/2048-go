@@ -4,6 +4,7 @@ type GameState struct {
 	Board [][]int
 }
 
+
 func NewGameState(size int) *GameState {
 	board := make([][]int, size)
 
