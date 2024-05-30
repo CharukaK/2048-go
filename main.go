@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"time"
 
 	"github.com/CharukaK/2048-go/internal"
 	"github.com/CharukaK/2048-go/internal/state"
@@ -21,10 +20,10 @@ func main() {
 
 	// gs := NewGameState(size)
 	scr, err := tcell.NewScreen()
-
 	if err != nil {
 		log.Fatalf("%+v", err)
 	}
+
 	if err := scr.Init(); err != nil {
 		log.Fatalf("%+v", err)
 	}
@@ -33,9 +32,33 @@ func main() {
 
 	// Clear screen
 	scr.Clear()
-	gs := state.NewGameState(size)
+	quit := func() {
+		panickVal := recover()
+		scr.Fini()
+		if panickVal != nil {
+			panic(panickVal)
+		}
+	}
+	defer quit()
 
-    internal.Render(*gs, scr)
+	gs := state.NewGameState(size)
+	for {
+		internal.Render(*gs, scr)
+		scr.Show()
+
+		event := scr.PollEvent()
+
+		switch ev := event.(type) {
+		case *tcell.EventResize:
+			scr.Sync()
+		case *tcell.EventKey:
+			k := ev.Key()
+			if k == tcell.KeyEsc || k == tcell.KeyCtrlC {
+                return
+			}
+		}
+	}
+
 	// scr.SetContent(0, 0, 'H', nil, tcell.StyleDefault)
 	// scr.SetContent(1, 0, 'i', nil, tcell.StyleDefault)
 	// scr.SetContent(2, 0, '!', nil, tcell.StyleDefault)
@@ -44,7 +67,4 @@ func main() {
 
 	// Makebox(scr, 2)
 
-	scr.Show()
-	time.Sleep(5 * time.Second)
-	scr.Fini()
 }
