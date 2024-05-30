@@ -18,7 +18,6 @@ func main() {
 		log.Fatal("Error reading grid size")
 	}
 
-	// gs := NewGameState(size)
 	scr, err := tcell.NewScreen()
 	if err != nil {
 		log.Fatalf("%+v", err)
@@ -53,8 +52,6 @@ func main() {
 			scr.Sync()
 		case *tcell.EventKey:
 			k := ev.Key()
-			fmt.Println(ev.Name())
-			fmt.Println(ev.Rune())
 
 			if k == tcell.KeyCtrlC || k == tcell.KeyEsc {
 				return
