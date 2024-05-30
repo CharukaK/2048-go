@@ -53,8 +53,21 @@ func main() {
 			scr.Sync()
 		case *tcell.EventKey:
 			k := ev.Key()
-			if k == tcell.KeyEsc || k == tcell.KeyCtrlC {
-                return
+			fmt.Println(ev.Name())
+			fmt.Println(ev.Rune())
+
+			if k == tcell.KeyCtrlC || k == tcell.KeyEsc {
+				return
+			}
+
+			if k == tcell.KeyUp || ev.Rune() == 'k' {
+				gs.MakeMove(state.MoveUp)
+			} else if k == tcell.KeyDown || ev.Rune() == 'j' {
+				gs.MakeMove(state.MoveDown)
+			} else if k == tcell.KeyLeft || ev.Rune() == 'h' {
+				gs.MakeMove(state.MoveLeft)
+			} else if k == tcell.KeyRight || ev.Rune() == 'l' {
+				gs.MakeMove(state.MoveRight)
 			}
 		}
 	}
