@@ -58,13 +58,4 @@ func main() {
 			}
 		}
 	}
-
-	// scr.SetContent(0, 0, 'H', nil, tcell.StyleDefault)
-	// scr.SetContent(1, 0, 'i', nil, tcell.StyleDefault)
-	// scr.SetContent(2, 0, '!', nil, tcell.StyleDefault)
-	//
-	// scr.Show()
-
-	// Makebox(scr, 2)
-
 }
