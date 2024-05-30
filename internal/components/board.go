@@ -26,13 +26,13 @@ func (b *Board) Render(s tcell.Screen) {
 	fullW := b.size * b.blockW
 	fullH := b.size * b.blockH
 
-	for row := 0; row < fullH; row++ {
-		for col := 0; col < fullW; col++ {
-			if col == 0 || col == fullW-1 {
+	for row := 0; row <= fullH; row++ {
+		for col := 0; col <= fullW; col++ {
+			if col == 0 || col == fullW {
 				s.SetCell(b.x+col, b.y+row, st, gl)
 			}
 
-			if row == 0 || row == fullH-1 {
+			if row == 0 || row == fullH {
 				s.SetCell(b.x+col, b.y+row, st, gl)
 			}
 
