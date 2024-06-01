@@ -3,6 +3,7 @@ package state
 import (
 	"container/list"
 	"log"
+	"math/rand"
 )
 
 type MoveEvent int
@@ -61,8 +62,10 @@ func NewGameState(size int) *GameState {
 		board[i] = make([]int, size)
 	}
 
-    // TODO : Randomize
-	board[2][2] = 2
+    startBlockX := rand.Intn(size)
+    startBlockY := rand.Intn(size)
+
+    board[startBlockY][startBlockX] = 2
 
 	return &GameState{
 		Board: board,

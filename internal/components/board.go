@@ -38,18 +38,6 @@ func (b *Board) Render(s tcell.Screen) {
 
 			if col%b.blockW == 0 || row%b.blockH == 0 {
 				s.SetCell(b.x+col, b.y+row, st, gl)
-
-				if !(col == fullW || row == fullH) {
-					cell := NewCell(
-						b.x+col+1,
-						b.y+row+1,
-						b.blockH-2,
-						b.blockW-2,
-						2,
-					)
-
-					cell.Render(s)
-				}
 			}
 
 		}

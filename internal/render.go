@@ -40,8 +40,25 @@ const (
 )
 
 func Render(st state.GameState, scr tcell.Screen) {
-    board := components.NewBoard( 10, 10, blockH, blockW, st)
-    board.Render(scr)
+	topOffset, leftOffset := 10, 10
+	board := components.NewBoard(topOffset, leftOffset, blockH, blockW, st)
+	board.Render(scr)
 
-    scr.Show()
+	// render individual cells
+	for row := 0; row < len(st.Board); row++ {
+		for col := 0; col < len(st.Board); col++ {
+
+			cell := components.NewCell(
+				leftOffset+1+col*blockW,
+				topOffset+1+row*blockH,
+				blockH-2,
+				blockW-2,
+				st.Board[row][col],
+			)
+
+			cell.Render(scr)
+		}
+	}
+
+	scr.Show()
 }
