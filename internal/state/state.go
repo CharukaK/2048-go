@@ -16,10 +16,18 @@ const (
 )
 
 type GameState struct {
-	Board [][]int
+	Board  [][]int
+	Filled bool
+	won    bool
+}
+
+type emptyEntry struct {
+	row int
+	col int
 }
 
 func (gs *GameState) MakeMove(ev MoveEvent) {
+	emptyList := make([]emptyEntry, 0)
 	switch ev {
 	case MoveUp:
 		for col := 0; col < len(gs.Board); col++ {
@@ -47,25 +55,36 @@ func (gs *GameState) MakeMove(ev MoveEvent) {
 				}
 				ri++
 			}
+
+			for row := colList.Len() - 1; row < len(gs.Board); row++ {
+				emptyList = append(emptyList, emptyEntry{row, col})
+			}
 		}
 	case MoveDown:
 	case MoveRight:
 	case MoveLeft:
+	}
+
+	if len(emptyList) == 0 {
+		gs.Filled = true
+	} else {
+        entryI := rand.Intn(len(emptyList))
+
+        gs.Board[emptyList[entryI].row][emptyList[entryI].col] = 2
 	}
 }
 
 func NewGameState(size int) *GameState {
 	board := make([][]int, size)
 
-
 	for i := range board {
 		board[i] = make([]int, size)
 	}
 
-    startBlockX := rand.Intn(size)
-    startBlockY := rand.Intn(size)
+	startBlockX := rand.Intn(size)
+	startBlockY := rand.Intn(size)
 
-    board[startBlockY][startBlockX] = 2
+	board[startBlockY][startBlockX] = 2
 
 	return &GameState{
 		Board: board,
