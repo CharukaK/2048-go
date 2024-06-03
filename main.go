@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/CharukaK/2048-go/internal"
@@ -10,13 +9,13 @@ import (
 )
 
 func main() {
-	fmt.Print("Enter grid size:")
-	var size int
-	_, err := fmt.Scanln(&size)
+	// fmt.Print("Enter grid size:")
+	var size int = 4
+	// _, err := fmt.Scanln(&size)
 
-	if err != nil {
-		log.Fatal("Error reading grid size")
-	}
+	// if err != nil {
+	// 	log.Fatal("Error reading grid size")
+	// }
 
 	scr, err := tcell.NewScreen()
 	if err != nil {
