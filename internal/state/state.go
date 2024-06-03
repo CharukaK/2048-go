@@ -51,6 +51,7 @@ func (gs *GameState) MakeMove(ev MoveEvent) {
 					gs.Board[row][col] == entries[len(entries)-1].val {
 
 					entries[len(entries)-1].val = gs.Board[row][col] + entries[len(entries)-1].val
+					entries[len(entries)-1].merged = true
 				} else {
 					entries = append(entries, entry{merged: false, val: gs.Board[row][col]})
 				}
@@ -87,6 +88,7 @@ func (gs *GameState) MakeMove(ev MoveEvent) {
 					gs.Board[row][col] == entries[len(entries)-1].val {
 
 					entries[len(entries)-1].val = gs.Board[row][col] + entries[len(entries)-1].val
+					entries[len(entries)-1].merged = true
 				} else {
 					entries = append(entries, entry{merged: false, val: gs.Board[row][col]})
 				}
@@ -123,6 +125,7 @@ func (gs *GameState) MakeMove(ev MoveEvent) {
 					gs.Board[row][col] == entries[len(entries)-1].val {
 
 					entries[len(entries)-1].val = gs.Board[row][col] + entries[len(entries)-1].val
+					entries[len(entries)-1].merged = true
 				} else {
 					entries = append(entries, entry{merged: false, val: gs.Board[row][col]})
 				}
@@ -159,6 +162,7 @@ func (gs *GameState) MakeMove(ev MoveEvent) {
 					gs.Board[row][col] == entries[len(entries)-1].val {
 
 					entries[len(entries)-1].val = gs.Board[row][col] + entries[len(entries)-1].val
+					entries[len(entries)-1].merged = true
 				} else {
 					entries = append(entries, entry{merged: false, val: gs.Board[row][col]})
 				}
