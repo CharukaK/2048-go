@@ -9,13 +9,7 @@ import (
 )
 
 func main() {
-	// fmt.Print("Enter grid size:")
 	var size int = 4
-	// _, err := fmt.Scanln(&size)
-
-	// if err != nil {
-	// 	log.Fatal("Error reading grid size")
-	// }
 
 	scr, err := tcell.NewScreen()
 	if err != nil {
