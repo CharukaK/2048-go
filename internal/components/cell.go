@@ -41,9 +41,15 @@ func (c *Cell) Render(s tcell.Screen) {
 	gl := ' '
 	st := tcell.StyleDefault
 	st = st.Background(c.background)
+	st = st.Foreground(c.foreground)
 
 	for row := 0; row <= c.blockH; row++ {
-		for col := 0; col <= c.blockW; col++ {
+		ri := len(c.val) - 1
+		for col := c.blockW; col >= 0; col-- {
+			if row == c.blockH && ri >= 0 {
+				gl = c.val[ri]
+				ri--
+			}
 			s.SetCell(c.x+col, c.y+row, st, gl)
 		}
 	}
@@ -67,11 +73,11 @@ func NewCell(x, y, cellH, cellW, val int) *Cell {
 	}
 
 	return &Cell{
-		x:      x,
-		y:      y,
-		val:    chars,
-		blockH: cellH,
-		blockW: cellW,
+		x:          x,
+		y:          y,
+		val:        chars,
+		blockH:     cellH,
+		blockW:     cellW,
 		background: background,
 		foreground: foreground,
 	}
